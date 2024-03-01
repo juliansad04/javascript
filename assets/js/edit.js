@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const itemId = urlParams.get("id");
 
+  let initialImageData;
+
   fetch(`http://localhost:3000/dataList/${itemId}`)
     .then((response) => response.json())
     .then((data) => {
@@ -12,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("bidForItem").value = data.bid;
       document.getElementById("account").value = data.account;
       document.getElementById("dateOfItem").value = data.date;
+      initialImageData = data.image;
     })
     .catch((error) => console.error("Error fetching item data:", error));
 
@@ -22,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       account: document.getElementById("account").value,
       date: document.getElementById("dateOfItem").value,
       file: document.getElementById("file").files[0],
+      image: initialImageData,
     };
 
     if (validateForm(formData)) {
@@ -65,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bid: formData.bid,
       account: formData.account,
       date: formData.date,
+      image: formData.image,
     };
 
     if (formData.file) {
