@@ -21,9 +21,14 @@ function convertImageToBase64(formData) {
 
     reader.onload = function (event) {
       const base64String = event.target.result;
-      // Thêm base64String vào formData
-      formData.image = base64String;
-      sendDataToServer(formData);
+      const dataWithImage = {
+        name: formData.name,
+        bid: formData.bid,
+        account: formData.account,
+        date: formData.date,
+        image: base64String,
+      };
+      sendDataToServer(dataWithImage);
     };
 
     reader.readAsDataURL(formData.file);
@@ -32,20 +37,20 @@ function convertImageToBase64(formData) {
   }
 }
 
-function sendDataToServer(formData) {
+function sendDataToServer(dataWithImage) {
   fetch("http://localhost:3000/dataList", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(dataWithImage),
   })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error submitting form");
       }
       console.log("Form submitted successfully");
-      /* window.location.href = "index.html"; */
+      window.location.href = "index.html";
     })
     .catch((error) => {
       console.error("Error:", error);

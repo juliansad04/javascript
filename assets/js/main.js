@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <h6>Bid: <em>${item.bid} ETH</em></h6>
                     <span class="date">${item.date}, 22:00</span>
                     <div class="button-main mt-2">
-                      <a href="" class="btn btn-outline-light">edit</a>
+                      <a href="edit.html?id=${item.id}" class="btn btn-outline-light">edit</a>
                       <a href="#" class="btn btn-outline-light delete-btn" data-id="${item.id}">delete</a>
                     </div>
                   </div>
