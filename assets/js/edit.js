@@ -24,16 +24,75 @@ document.addEventListener("DOMContentLoaded", function () {
       file: document.getElementById("file").files[0],
     };
 
-    editItem(formData);
+    if (validateForm(formData)) {
+      convertImageToBase64(formData);
+    }
   });
 
-  function editItem(formData) {
+  function validateForm(formData) {
+    const itemName = formData.name.trim();
+    const bidForItem = formData.bid.trim();
+    const account = formData.account.trim();
+    const dateOfItem = formData.date.trim();
+    const file = formData.file;
+
+    if (itemName === "") {
+      alert("Vui lòng nhập tên mục");
+      return false;
+    }
+
+    if (bidForItem === "") {
+      alert("Vui lòng nhập giá đấu cho mục");
+      return false;
+    }
+
+    if (account === "") {
+      alert("Vui lòng nhập tài khoản");
+      return false;
+    }
+
+    if (dateOfItem === "") {
+      alert("Vui lòng nhập ngày mục");
+      return false;
+    }
+
+    if (!file) {
+      alert("Vui lòng chọn tệp");
+      return false;
+    }
+
+    return true;
+  }
+
+  function convertImageToBase64(formData) {
+    if (formData.file) {
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        const base64String = event.target.result;
+        const dataWithImage = {
+          name: formData.name,
+          bid: formData.bid,
+          account: formData.account,
+          date: formData.date,
+          image: base64String,
+        };
+        editItem(dataWithImage);
+      };
+
+      reader.readAsDataURL(formData.file);
+    } else {
+      console.error("No file selected");
+    }
+  }
+
+  function editItem(dataWithImage) {
     fetch(`http://localhost:3000/dataList/${itemId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(dataWithImage),
     })
       .then((response) => {
         if (!response.ok) {
