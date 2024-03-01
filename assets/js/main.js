@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="col-lg-4 col-md-6">
                 <div class="item">
                   <div class="left-img">
-                    <img src="data:image/png;base64,${item.image}" alt="">
-                  </div>
+                    <img src="${item.image}" alt="" onerror="console.error('Error loading image:', this.src)">
+                </div>
                   <div class="right-content">
                     <h4>${item.name}</h4>
                     <a href="#">@${item.account}</a>

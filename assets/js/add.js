@@ -11,9 +11,46 @@ document
       file: document.getElementById("file").files[0],
     };
 
-    console.log(formData);
-    convertImageToBase64(formData);
+    if (validateForm(formData)) {
+      console.log(formData);
+      convertImageToBase64(formData);
+    }
   });
+
+function validateForm(formData) {
+  const itemName = formData.name.trim();
+  const bidForItem = formData.bid.trim();
+  const account = formData.account.trim();
+  const dateOfItem = formData.date.trim();
+  const file = formData.file;
+
+  if (itemName === "") {
+    alert("Vui lòng nhập tên mục");
+    return false;
+  }
+
+  if (bidForItem === "") {
+    alert("Vui lòng nhập giá đấu cho mục");
+    return false;
+  }
+
+  if (account === "") {
+    alert("Vui lòng nhập tài khoản");
+    return false;
+  }
+
+  if (dateOfItem === "") {
+    alert("Vui lòng nhập ngày mục");
+    return false;
+  }
+
+  if (!file) {
+    alert("Vui lòng chọn tệp");
+    return false;
+  }
+
+  return true;
+}
 
 function convertImageToBase64(formData) {
   if (formData.file) {
