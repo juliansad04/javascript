@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     if (validateForm(formData)) {
-      convertImageToBase64(formData);
+      editItem(formData);
     }
   });
 
@@ -56,37 +56,37 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     }
 
-    if (!file) {
-      alert("Vui lòng chọn tệp");
-      return false;
-    }
-
     return true;
   }
 
-  function convertImageToBase64(formData) {
+  function editItem(formData) {
+    const dataWithImage = {
+      name: formData.name,
+      bid: formData.bid,
+      account: formData.account,
+      date: formData.date,
+    };
+
     if (formData.file) {
-      const reader = new FileReader();
-
-      reader.onload = function (event) {
-        const base64String = event.target.result;
-        const dataWithImage = {
-          name: formData.name,
-          bid: formData.bid,
-          account: formData.account,
-          date: formData.date,
-          image: base64String,
-        };
-        editItem(dataWithImage);
-      };
-
-      reader.readAsDataURL(formData.file);
+      convertImageToBase64(formData, dataWithImage);
     } else {
-      console.error("No file selected");
+      sendDataToServer(dataWithImage);
     }
   }
 
-  function editItem(dataWithImage) {
+  function convertImageToBase64(formData, dataWithImage) {
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const base64String = event.target.result;
+      dataWithImage.image = base64String;
+      sendDataToServer(dataWithImage);
+    };
+
+    reader.readAsDataURL(formData.file);
+  }
+
+  function sendDataToServer(dataWithImage) {
     fetch(`http://localhost:3000/dataList/${itemId}`, {
       method: "PUT",
       headers: {
