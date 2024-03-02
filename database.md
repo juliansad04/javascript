@@ -1,0 +1,25 @@
+{
+"students": [
+{
+"name": "Nguyen Van A",
+"birthday": "1999-01-01",
+"gpa": 3.5,
+"studentID": "SV001",
+"id": "11b6"
+},
+{
+"name": "Tran Thi B",
+"birthday": "2000-05-15",
+"gpa": 3.2,
+"studentID": "SV002",
+"id": "492a"
+},
+{
+"name": "Le Van C",
+"birthday": "2001-10-20",
+"gpa": 3.8,
+"studentID": "SV003",
+"id": "654f"
+}
+]
+}
