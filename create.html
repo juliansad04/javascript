@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create - Bài 5</title>
+    <link rel="stylesheet" href="tainguyen/bs5/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <form id="studentForm">
+            <div class="form-group">
+                <label for="studentID">Mã sinh viên:</label>
+                <input type="text" class="form-control" id="studentID" placeholder="Nhập mã sinh viên">
+            </div>
+            <div class="form-group">
+                <label for="name">Tên sinh viên:</label>
+                <input type="text" class="form-control" id="name" placeholder="Nhập tên sinh viên">
+            </div>
+            <div class="form-group">
+                <label for="dob">Ngày sinh:</label>
+                <input type="date" class="form-control" id="dob">
+            </div>
+            <div class="form-group">
+                <label for="gpa">Điểm trung bình:</label>
+                <input type="number" class="form-control" id="gpa" placeholder="Nhập điểm trung bình">
+            </div>
+            <div class="form-group">
+                <label>Giới tính:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="male" id="genderMale">
+                    <label class="form-check-label" for="genderMale">Nam</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="female" id="genderFemale">
+                    <label class="form-check-label" for="genderFemale">Nữ</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+<script src="tainguyen/bs5/bootstrap.min.js"></script>
+<script src="tainguyen/axios.min-v1.js"></script>
+<script src="js/bai5.js"></script>
+
+</html>
