@@ -9,6 +9,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const gender = document.querySelector('input[name="gender"]:checked');
     const studentID = document.querySelector("#studentID").value;
 
+    if (!name.trim()) {
+      alert("Tên sinh viên không được để trống.");
+      return;
+    }
+
+    if (!dob) {
+      alert("Ngày sinh không được để trống.");
+      return;
+    }
+
+    const today = new Date();
+    const selectedDate = new Date(dob);
+    if (selectedDate > today) {
+      alert("Ngày sinh không được lớn hơn ngày hiện tại.");
+      return;
+    }
+
     let genderValue = "";
     if (gender) {
       genderValue = gender.value;
@@ -32,8 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .post("http://localhost:3000/students", student)
             .then(() => {
               window.location.href = "bai4.html";
-
-              form.reset();
             })
             .catch((error) => {
               console.error("Lỗi khi thêm sinh viên:", error);
