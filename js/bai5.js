@@ -26,9 +26,29 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    if (!gpa.trim()) {
+      alert("Điểm trung bình không được để trống.");
+      return;
+    }
+
+    if (isNaN(gpa) || gpa < 0) {
+      alert("Điểm trung bình phải là một số không âm.");
+      return;
+    }
+
+    if (!studentID.trim()) {
+      alert("Mã sinh viên không được để trống.");
+      return;
+    }
+
     let genderValue = "";
     if (gender) {
       genderValue = gender.value;
+    }
+
+    if (!genderValue) {
+      alert("Vui lòng chọn giới tính.");
+      return;
     }
 
     const student = {
